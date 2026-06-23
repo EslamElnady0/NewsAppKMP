@@ -15,12 +15,10 @@ val dataModule = module {
     single { getDatabaseBuilder() }
     single {
         HttpClient {
-            expectSuccess = true
             install(ContentNegotiation) {
                 json(
                     Json {
                         ignoreUnknownKeys = true
-                        isLenient = true
                     },
                 )
             }
