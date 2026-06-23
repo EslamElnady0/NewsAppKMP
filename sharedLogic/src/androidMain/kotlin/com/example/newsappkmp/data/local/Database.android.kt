@@ -2,18 +2,16 @@ package com.example.newsappkmp.data.local
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 
-fun getDatabaseBuilder(context: Context): RoomDatabase.Builder<ArticlesDatabase> {
-    val applicationContext = context.applicationContext
-    val databaseFile = applicationContext.getDatabasePath(DATABASE_NAME)
-    return Room.databaseBuilder<ArticlesDatabase>(
-        context = applicationContext,
+lateinit var appContext: Context
+
+actual fun getDatabaseBuilder(): ArticlesDatabase {
+    val databaseFile = appContext.getDatabasePath(DATABASE_NAME)
+    val builder = Room.databaseBuilder<ArticlesDatabase>(
+        context = appContext,
         name = databaseFile.absolutePath,
     )
+    return buildArticlesDatabase(builder)
 }
-
-fun createAndroidDatabase(context: Context): ArticlesDatabase =
-    buildArticlesDatabase(getDatabaseBuilder(context))
 
 private const val DATABASE_NAME = "articles.db"

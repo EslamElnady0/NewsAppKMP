@@ -21,6 +21,8 @@ expect object ArticlesDatabaseConstructor : RoomDatabaseConstructor<ArticlesData
     override fun initialize(): ArticlesDatabase
 }
 
+expect fun getDatabaseBuilder(): ArticlesDatabase
+
 fun buildArticlesDatabase(
     builder: RoomDatabase.Builder<ArticlesDatabase>,
 ): ArticlesDatabase = builder
